@@ -1,0 +1,8 @@
+public class Main {
+    public static void main(String[] args) {
+       Life Dallas = new Life ("Dallas", 17, false, false);
+
+       System.out.println(Dallas.kindergarden());
+
+    }
+}
