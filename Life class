@@ -1,0 +1,147 @@
+import java.util.Scanner;
+public class Life {
+    // 1) instance variables
+    Scanner kb = new Scanner(System.in);
+    private String name;
+    private int age;
+    private boolean driverLicense;
+    private boolean votingStatus;
+    private static int lifeEvents = 0;// will count each time a method is used which represent life events
+    // 2) Constructors
+
+    public Life() {
+        this.name = "";
+        this.age = 0;
+        this.driverLicense = false;
+        this.votingStatus = false;
+    }
+
+    public Life(String name, int age, boolean driverLicense, boolean registeredVoter) {
+        this.name = name;
+        this.age = age;
+        this.driverLicense = driverLicense;
+        this.votingStatus = registeredVoter;
+    }
+
+    // Getters and Setters
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public boolean getDriverLicense() {
+        return driverLicense;
+    }
+
+    public boolean getVotingStatus() {
+        return votingStatus;
+    }
+    public static int getlifeEvents(){
+        return lifeEvents;
+    }
+
+    // Brain method
+    public String kindergarden(){
+        int lower = 0;
+        int upper = 1;
+        String kinderAnswer1, kinderAnswer2 ;;
+        String kinderResponse;
+
+        System.out.println("It's your first day of kindergarden, do you know how to spell your name?: ");
+        kinderAnswer1 = kb.nextLine();
+
+        if (kinderAnswer1.equals("Yes")){
+            System.out.println("Ok, then spell your name: ");
+            kinderAnswer2 = kb.nextLine();
+
+            if (kinderAnswer2.equals("Dallas")){
+                kinderResponse = "Great Job!! you spelled your name correctly, you get a gold star!";
+            }//end of nested if statement
+            else {
+                kinderResponse = "You didn't spell your name correctly, but thats ok, I spelled it out for you above";
+                for(int i = 0; i < name.length(); i++){
+                    System.out.print(name.substring(lower,upper));
+                    lower++;
+                    upper++;
+                }
+            }//end of nested else statement
+
+        }//end of main if statement
+
+        else {
+            kinderResponse = "\nThat's fine, I spelled your name out for you above." ;
+            for(int i = 0; i < name.length(); i++){
+                System.out.print(name.substring(lower,upper));
+                lower++;
+                upper++;
+            }
+        }//end of else statement
+        lifeEvents++;
+        return kinderResponse;
+    }// end of kindergarden brain method
+
+    public String clubbing(){
+        String clubbingChoice1;
+        String clubResponse = null;
+
+        System.out.println("You have to be 21 or over to enter the club ya'll. \nOk, let me see your id");
+        System.out.println("Do you want to use a fake id, Yes or no?: ");
+        clubbingChoice1 = kb.nextLine();
+
+        if (clubbingChoice1.equals("Yes")){
+            int newAge;
+            System.out.println("What age will be on your fake id: ");
+            newAge = kb.nextInt();
+
+            if (newAge < 21){
+                clubResponse = "Your too young, your not allowed in. NEXT!!!!";
+            }
+            else if (newAge >= 21){
+                clubResponse = "Ok, your old enough, you can go in. NEXT!!!";
+            }
+        }
+
+        else{
+            clubResponse = "Your real id will be checked by the bouncer...";
+
+            if (age < 21){
+                clubResponse ="Your too young, your not allowed in. NEXT!!!!";
+            }
+            else if (age >= 21){
+                clubResponse = "Ok, your old enough, you can go in. NEXT!!!";
+            }
+        }
+        lifeEvents++;
+        return clubResponse;
+
+    }//end of clubbing method
+
+    // 3) toString
+    public String toString(){
+        String driverState = "";
+        String votingState = "";
+        if (driverLicense == true){
+            driverState = "You do have a drivers license";
+        }
+        else if (driverLicense == false) {
+            driverState = "You don't have a drivers license";
+        }
+
+        if (age < 18){
+            votingState = "You cannot vote";
+        }
+        else if (age >= 18 && votingStatus == true){
+            votingState = "You are registered to vote";
+        }
+        else if (age >= 18 && votingStatus == false){
+            votingState = "You need to register to vote";
+        }
+        String result = "Your name is " + name + "\nYou are " + age + " years old" + "\n" + votingState + "\n" + driverState;
+
+        return result;
+    }
+
+}
